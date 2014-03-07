@@ -28,9 +28,9 @@ var getEvents = function(from, to, nation, fields, fn){
 
 		var stream = null;
 		if(!fields)
-	  		stream = collection.find(constraints).sort({date: 1}).stream();
+	  		stream = collection.find(constraints).sort({date: 1, location: 1}).stream();
 		else
-	  		stream = collection.find(constraints, fields).sort({date: 1}).stream();
+	  		stream = collection.find(constraints, fields).sort({date: 1, location: 1}).stream();
 
 		stream.on('error', function(err) {  
 			 console.log(err);
