@@ -1,0 +1,1 @@
+curl -X PUT -H "Content-Type: application/json" -H "App-Key: abc" -i -d '@./update_event.json' http://localhost:5000/api/events/55

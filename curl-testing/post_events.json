@@ -1,11 +1,15 @@
 {
 	"events" : [
 		{
-			"date":"2014-03-02T00:00:00.00Z",
-			"title":"Added by POST"
+			"date": "2014-03-05T00:00:00.00Z",
+			"title":"Added by POST",
+			"content": "content 12",
+			"eventid":12
 		},
 		{
-			"date": "2014-03-02T00:00:00.00Z",
-			"title":"Added by POST 2"
+			"date": "2014-03-05T00:00:00.00Z",
+			"title":"Added by POST 2",
+			"content": "content 13",
+			"eventid": 13
 		}]
 }
