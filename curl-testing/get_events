@@ -1,1 +1,1 @@
-curl -g -X GET -H "Content-Type: application/json" -H "App-Key: abc" -i http://localhost:5000/api/events?from=2014-03-05T00:00:00.00Z\&to=2014-03-05T00:00:00.00Z
+curl -g -X GET -H "Content-Type: application/json" -H "App-Key: abc" -i http://localhost:5000/api/events?from=2014-04-14T00:00:00.00Z\&to=2014-04-15T00:00:00.00Z

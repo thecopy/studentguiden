@@ -1,18 +1,19 @@
 var config = require('./config');
 
 module.exports = function(req, res, next){
-	var headerName = 'app-key';
-
-	if(!req.headers[headerName]){
-		console.log('No header "' + headerName + '"');
-				setError(res, 401, 'Unauthorized');
-		return;
+	if(config.disableAuthIfDevMode === true){
+		if(config.isInDevMode === true){
+			next();
+			return;
+		}
 	}
 
-	if(req.headers[headerName] == config.appkey){
+	var headerName = 'app-key';
+
+	if(req.headers[headerName] && req.headers[headerName] == config.appkey){
 		next();
-	}else{
-		console.log("Wrong key: " + req.headers[headerName])
+	}else{	
+		console.log('Auth failed for ' + req.connection.remoteAddress + ': header["' + headerName + '"]=' + req.headers[headerName]);
 		setError(res, 401, 'Unauthorized');
 	}
 };

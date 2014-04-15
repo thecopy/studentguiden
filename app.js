@@ -15,3 +15,7 @@ var app = connect()
   .use(StudentGuiden);
 
 http.createServer(app).listen(5000);
+
+console.log("Started Studentguiden Back-End Service");
+console.log("Config:")
+console.dir(require("./config"));

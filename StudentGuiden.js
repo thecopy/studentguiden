@@ -2,7 +2,10 @@ var repository = require("./repository");
 var URL = require('url');
 
 module.exports = function(req, res){
-console.log(req.url.charAt(11));
+
+	// Oh, how i wish i used ExpressJS right now :)
+	// Because this is kinda ugly 
+	
 	if(req.url.substr(0,11) == '/api/events'){
 		if(req.method == 'GET')
 			if(req.url.charAt(11) == '/') // no event-id specified
@@ -54,7 +57,7 @@ function get_events(req,res){
 
 	var from = convertDateToUTC(new Date(query.from));
 	var to = convertDateToUTC(new Date(query.to));
-	
+
 	var nation = query.nation;
 	var fields = query.fields;
 
@@ -83,7 +86,6 @@ function get_events(req,res){
 		});
 	});
 }
-
 
 function update_event(req,res){
 
@@ -115,7 +117,6 @@ function update_event(req,res){
 }
 
 function convertDateToUTC(date) { 
-	return date;
 	return new Date(
 		date.getUTCFullYear(), 
 		date.getUTCMonth(), 
