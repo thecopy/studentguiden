@@ -30,7 +30,7 @@ function post_events(req,res){
 		console.log("Added " + count + " events. Error: " + err);
 
 		if(err){
-			setError(res, 400, err.toString());
+			setError(res, 403, err.toString());
 		}else{
 			res.end("ok:" + count);
 		}
@@ -97,7 +97,7 @@ function update_event(req,res){
 		|| event.content == null
 		|| event.title == null){
 		
-		setError(res, 400, "Invalid request. Please provide an event with 'eventid', 'content' and 'title'.");
+		setError(res, 403, "Invalid request. Please provide an event with 'eventid', 'content' and 'title'.");
 		return;
 	}
 

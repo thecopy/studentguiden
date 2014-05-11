@@ -56,11 +56,15 @@ var addEvents = function(events, fn){
 	  	}
 
 	  	console.log("Adding " + count + " events...");
-	  	console.dir(events);
-	  	collection.insert(events, {w:1}, function(err, count){
-	  		db.close();
-	  		fn(err, count);
-	  	});
+	  	if(typeof events === 'undefined' || events === null){
+	  		console.log("Events is undefined or null!")
+	  		fn("Illformatted JSON",[]);
+	  	}else{
+		  	collection.insert(events, {w:1}, function(err, count){
+		  		db.close();
+		  		fn(err, count);
+		  	});
+		  }
   	});
 }
 
