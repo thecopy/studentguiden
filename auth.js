@@ -3,6 +3,7 @@ var config = require('./config');
 module.exports = function(req, res, next){
 	if(config.disableAuthIfDevMode === true){
 		if(config.isInDevMode === true){
+			console.log("Skipping auth because is in dev mode");
 			next();
 			return;
 		}

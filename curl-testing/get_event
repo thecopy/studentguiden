@@ -1,0 +1,1 @@
+curl -g -X GET -H "Content-Type: application/json" -H "App-Key: abc" -i http://localhost:5000/api/events/534d562c494e14c2055d9b9e
