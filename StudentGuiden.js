@@ -89,20 +89,15 @@ function get_events(req,res){
 
 function update_event(req,res){
 
-	var eventid = parseInt(req.url.substr(12));
-
 	var event = req.body;
 	if(event == null 
-		|| typeof eventid != 'number'
+		|| isNaN(event.eventid)
 		|| event.content == null
 		|| event.title == null){
 		
 		setError(res, 403, "Invalid request. Please provide an event with 'eventid', 'content' and 'title'.");
 		return;
 	}
-
-	event.eventid = eventid;
-
 	repository.updateEvent(event, function(err, result){
 
 		if(err)
