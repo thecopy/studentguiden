@@ -34,6 +34,8 @@ module.exports = parser;
 
 var setError = function(res, code, message,e,extra){
   console.log(message);
+  console.log(e);
+  console.log(extra);
   res.writeHead(code, message, {'content-type' : 'text/plain'});
   res.write("Exception:\n");
   res.write(e.toString());
