@@ -80,7 +80,8 @@ var updateEvent = function(event, fn){
 	  		{eventid : event.eventid},	// query
 	  		{ $set: {  					// new content
 	  			content: event.content,
-	  			title: event.title
+	  			title: event.title,
+	  			categories: event.categories
 	  		}},
 	  		{w:1}, function(err, count){
 		  		db.close();
