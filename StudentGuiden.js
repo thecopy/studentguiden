@@ -60,13 +60,22 @@ function get_events(req,res){
 
 	var nation = query.nation;
 	var fields = query.fields;
+	var category = query.category;
 
 	if(from == null || to == null){
 		setError(res, 400, "from and to parameters cannot be null!");
 		return;
 	}
 
-	repository.getEvents(from, to, nation, fields, function(stream,db){
+	if(category == "club"){
+		category = ['Klubb','Club','Gasque', 'Pub'];
+	}else if(category == "food"){
+		category = ['Restaurant','Food','Lunch','Breakfast','Frukost','Brunch','Café'];
+	}else if(category == "misc"){
+		category = ['Culture','Newcomer','Kultur','Valborg','Alumni','Sports','Sport'];
+	}
+
+	repository.getEvents(from, to, nation, fields, category, function(stream,db){
 
 		if(!stream)
 		{

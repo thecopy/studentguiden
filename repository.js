@@ -7,7 +7,7 @@ var getDb = function(fn){
 	MongoClient.connect(config.hostname, fn);
 }
 
-var getEvents = function(from, to, nation, fields, fn){
+var getEvents = function(from, to, nation, fields, category, fn){
 	getDb(function(err, db) {
 	  	if(err) { throw new Error(err); }
 
@@ -16,6 +16,10 @@ var getEvents = function(from, to, nation, fields, fn){
 	  	var constraints = 	{
 						  		date: { $gte : from, $lte: to }
 						  	};
+
+		if(category != null){
+			constraints.categories = { $in: category};
+		}
 
 		if(nation != null || nation != undefined){
 			constraints.location = nation.toLowerCase();
