@@ -101,10 +101,9 @@ function update_event(req,res){
 	var event = req.body;
 	if(event == null 
 		|| isNaN(event.eventid)
-		|| event.content == null
 		|| event.title == null){
 		
-		setError(res, 403, "Invalid request. Please provide an event with 'eventid', 'content' and 'title'.");
+		setError(res, 403, "Invalid request. Please provide an event with 'eventid', and 'title'.");
 		return;
 	}
 	repository.updateEvent(event, function(err, result){
