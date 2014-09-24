@@ -78,14 +78,14 @@ var updateEvent = function(event, fn){
 	  	var collection = db.collection(config.eventCollectionName);
 
 	  	console.log("Updating event " + event.eventid + "...");
-	  	
+
+	  	var stuffToSet = { title: event.title; };
+	  	if(event.content != null){ stuffToSet.content = event.content; }
+	  	if(event.categories != null){ stuffToSet.categories = event.categories; }
+
 	  	collection.update(
 	  		{eventid : event.eventid},	// query
-	  		{ $set: {  					// new content
-	  			content: event.content,
-	  			title: event.title,
-	  			categories: event.categories
-	  		}},
+	  		{ $set: stuffToSet},
 	  		{w:1}, function(err, count){
 		  		db.close();
 		  		fn(err, count);
