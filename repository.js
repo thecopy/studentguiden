@@ -79,7 +79,7 @@ var updateEvent = function(event, fn){
 
 	  	console.log("Updating event " + event.eventid + "...");
 
-	  	var stuffToSet = { title: event.title; };
+	  	var stuffToSet = { title: event.title };
 	  	if(event.content != null){ stuffToSet.content = event.content; }
 	  	if(event.categories != null){ stuffToSet.categories = event.categories; }
 
