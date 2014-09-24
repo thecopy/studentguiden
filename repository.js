@@ -35,7 +35,6 @@ var getEvents = function(from, to, nation, fields, category, fn){
 	  		stream = collection.find(constraints).sort({date: 1, location: 1}).stream();
 		else
 	  		stream = collection.find(constraints, fields).sort({date: 1, location: 1}).stream();
-
 		stream.on('error', function(err) {  
 			 console.log(err);
 			 db.close();
@@ -94,6 +93,27 @@ var updateEvent = function(event, fn){
   	});
 }
 
+var updateEventCategory = function(eventid, category, fn){
+	getDb(function(err, db) {
+	  	if(err) { throw new Error(err); }
+
+	  	var collection = db.collection(config.eventCollectionName);
+
+	  	console.log("Updating event " + eventid + "...");
+	  	var id = parseInt(eventid);
+	  	var c = [ category ];
+	  	collection.update(
+	  		{ eventid: id },	// query
+	  		{ $set: {  				
+	  			categories: c
+	  		}},
+	  		{w:1}, function(err, count){
+		  		db.close();
+		  		fn(err, count);
+	  	});
+  	});
+}
+
 
 var getEvent = function(id, fn){
 	getDb(function(err, db) {
@@ -107,9 +127,26 @@ var getEvent = function(id, fn){
   	});
 }
 
+var getStats = function(from, to, fn){
+	getDb(function(err, db) {
+	  	if(err) { throw new Error(err); }
+
+	  	var collection = db.collection(config.statsCollectionName);
+	  	
+		// Do a Group by field a
+		collection.group(
+			['day'], 
+			{'day':{'$gte':from, '$lte': to}}, 
+			{"count":0}, 
+			"function (obj, prev) { prev.count++; }", 
+			fn);
+  	});
+}
 
 
 module.exports.getEvent = getEvent;
 module.exports.updateEvent = updateEvent;
 module.exports.getEvents = getEvents;
 module.exports.addEvents = addEvents;
+module.exports.updateEventCategory = updateEventCategory;
+module.exports.getStats = getStats;

@@ -1,0 +1,36 @@
+extends base
+
+block content
+    
+  div.row.hero
+    h1.black-shadow Studentguiden GUI
+    span
+      a.thin(href='/gui/stats/') stats
+
+  ul
+    for e in events
+      li.event-item
+        h2 #{e.title} 
+        if !e.categories || e.categories.length == 0
+          span Set Category: 
+            a(href='/gui/setcategory/#{e.eventid}/Restaurang') Restaurang
+            | , 
+            a(href='/gui/setcategory/#{e.eventid}/Fika') Fika
+            | , 
+            a(href='/gui/setcategory/#{e.eventid}/Lunch') Lunch
+            | , 
+            a(href='/gui/setcategory/#{e.eventid}/Frukost') Frukost
+            | , 
+            a(href='/gui/setcategory/#{e.eventid}/Klubb') Klubb
+            | , 
+            a(href='/gui/setcategory/#{e.eventid}/Gasque') Gasque
+            | , 
+            a(href='/gui/setcategory/#{e.eventid}/Pub') Pub
+            | , 
+            a(href='/gui/setcategory/#{e.eventid}/Kultur') Kultur
+        else
+          small #{e.categories}
+
+        div.event-description.dark-background
+          small !{e.content}
+                        

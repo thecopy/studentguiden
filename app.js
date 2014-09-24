@@ -4,13 +4,16 @@ var gzip = require("connect-gzip");
 
 var auth = require("./auth");
 var StudentGuiden = require("./StudentGuiden");
+var StudentGuidenGui = require("./StudentGuidenGui");
 var bodyParser = require("./bodyParser");
-
+var stats = require("./stats");
 
 var app = connect()
   .use(connect.logger('dev'))
   .use(gzip)
+  .use(StudentGuidenGui)
   .use(auth)
+  .use(stats)
   .use(bodyParser)
   .use(StudentGuiden);
 

@@ -1,0 +1,67 @@
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro);
+
+.hero{
+	text-align: center;
+  	margin-left: auto ;
+  	margin-right: auto ;
+  	padding-top: 90px;
+  	padding-bottom: 90px;
+  	font-family: 'Source Sans Pro', sans-serif;
+}
+
+ul#notifications{
+	margin: 20px;
+}
+
+h1,h2,h3,h4,h5,h6{
+  	font-family: 'Source Sans Pro', sans-serif;
+}
+
+h3 a {
+	color: black;
+}
+
+nav.top-bar{
+	padding: 15px;}
+
+nav.top-bar,
+nav.top-bar section.top-bar-section ul,
+nav.top-bar section.top-bar-section li:not(.has-form) a:not(.button){
+  	background: transparent;
+}
+
+body{
+	background-repeat: repeat;
+	background-image: url('/public/white_wall_hash.png');
+}
+
+code {
+	color: #F0E68C;
+}
+
+ul{
+	list-style: none;
+}
+
+ul.styled{
+	list-style: disc;
+}
+
+ul.center{
+	display: block;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+li.event-item{
+	padding: 5px;
+
+	margin: 5px;
+	display: block;
+	background-color: rgba(255,255,255,0.6);
+}
+
+.event-description{
+	margin: 5px;
+}

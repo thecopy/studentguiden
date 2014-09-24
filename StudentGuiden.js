@@ -1,7 +1,7 @@
 var repository = require("./repository");
 var URL = require('url');
 
-module.exports = function(req, res){
+module.exports = function(req, res, next){
 
 	// Oh, how i wish i used ExpressJS right now :)
 	// Because this is kinda ugly 
@@ -17,7 +17,7 @@ module.exports = function(req, res){
 		else if(req.method == 'PUT')
 			update_event(req,res);
 	}else{
-			setError(res, 400, "Invalid request for api parser: " + req.url);
+		next();
 	}
 }
 

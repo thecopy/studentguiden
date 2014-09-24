@@ -1,0 +1,59 @@
+extends base
+
+block content
+    
+  div.row.hero
+    h1.black-shadow Studentguiden Stats
+                        
+    canvas(id="myChart" width="800" height="200")
+    script(type='text/javascript' src='/public/Chart.js/Chart.js')
+    script(type='text/javascript' src='/public/moment.min.js')
+
+    script.
+      Chart.defaults.global.scaleBeginAtZero = true;
+      Chart.defaults.global.animationSteps = 60;
+      var ctx = document.getElementById("myChart").getContext("2d");
+      var data = !{JSON.stringify(stats)};
+
+
+      var transformedStats = {
+        labels: [],
+        datasets: [{
+                fillColor: "rgba(151,187,205,0.2)",
+                strokeColor: "rgba(151,187,205,1)",
+          data:[] 
+        }]
+      };
+
+      for(var i = 0; i < data.length; i++){
+        currentRow = data[i];
+
+        // To add dates with 0 api requests to get a linear x-axis
+        if(i > 1){
+          var diffFromLastEntry = moment(currentRow.day)
+            .diff(moment(data[i-1].day)
+               ,'days');
+    
+          if(diffFromLastEntry >= 2){
+            for(var d = 1; d < diffFromLastEntry;d++){
+              var tempDateLabel = moment(data[i-1].day).add(d).format("ddd, DD/MM");
+              var tempCount = 0;
+              transformedStats.labels.push(tempDateLabel);
+              transformedStats.datasets[0].data.push(tempCount);        
+            }
+          }
+        }
+
+        transformedStats.labels.push(moment(currentRow.day).format("ddd, DD/MM"));
+        transformedStats.datasets[0].data.push(currentRow.count);
+      }
+
+      var diffWithToday = moment(data[data.length-1].day).diff(moment(),'days');
+      console.log(diffWithToday);
+      if(diffWithToday < 0){
+        transformedStats.labels.push('Today');
+        transformedStats.datasets[0].data.push(0);
+      }
+
+      var myNewChart = new Chart(ctx).Line(transformedStats,{bezierCurve : false});
+        
