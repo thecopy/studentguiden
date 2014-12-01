@@ -86,6 +86,7 @@ function get_events(req,res){
 		var result = [];
 
 		stream.on('data', function(eventItem){
+			eventItem = fixDaylightSavingsDateDiff(eventItem);
 			result.push(eventItem);
 		});
 
@@ -124,9 +125,19 @@ function convertDateToUTC(date) {
 		date.getUTCFullYear(), 
 		date.getUTCMonth(), 
 		date.getUTCDate(), 
-		date.getUTCHours(),
+		date.getUTCHours()+1, /* +1 when it is winter time! */
 		date.getUTCMinutes(), 
 		date.getUTCSeconds());
+}
+
+Date.prototype.addHours = function(h) {    
+   this.setTime(this.getTime() + (h*60*60*1000)); 
+   return this;   
+}
+
+function fixDaylightSavingsDateDiff(event) { 
+	event.date.addHours(1);
+	return event;
 }
 
 var setError = function(res, code, message){
